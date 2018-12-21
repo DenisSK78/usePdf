@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import work.usepdf.object.Unit;
 import work.usepdf.repository.ArrayNumberLearnedUnits;
@@ -14,11 +15,7 @@ import work.usepdf.service.EnService;
 import work.usepdf.service.MurphyUnitsMap;
 import work.usepdf.service.PdfProcessor;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
+
 import java.util.Map;
 
 @RunWith(SpringRunner.class)
@@ -39,6 +36,9 @@ public class UsepdfApplicationTests {
     @Autowired
     private PdfProcessor pdfProcessor;
 
+    @Autowired
+    private ApplicationContext context;
+
 
     @Test
     public void murphyLessonMapTest() {
@@ -52,7 +52,7 @@ public class UsepdfApplicationTests {
     }
 
     @Test
-    public void writePdf() {
-
+    public void getPath() {
+        System.out.println(context.getBean("cPath"));
     }
 }

@@ -28,19 +28,18 @@
 
     </style>
 </head>
-<header>
-    <div class="head">
-        <div>
-            <h2>English by Murphy</h2>
-        </div>
-    </div>
-</header>
+
 <body>
+<div class="head">
+    <div style="background-color: #5A6693; width: 100%; color: #E9F1FF; height: 80px" >
+        <h2 style="font-family: 'Amsterdam', sans-serif; font-size: 24px; padding: 20px" >English by Murphy</h2>
+    </div>
+</div>
 
 <div>
     <table style="font-family: 'Amsterdam', sans-serif; font-size: small" >
         <thead>
-        <tr>
+        <tr style="color: gray">
             <th>#</th>
             <th>ID:</th>
             <th>NAME:</th>
@@ -48,7 +47,7 @@
         </thead>
         <tbody>
             <#list units as unit>
-            <tr>
+            <tr style="background-color: #FAFAFB">
                 <td>
                     <p>${unit_index + 1}</p>
                 </td>
@@ -67,8 +66,8 @@
 </div>
 
 <div>
-    <img src="../pics/megaphone.png" height="80" width="80"/>
-    <h5>Repeat it at least :)</h5>
+    <p><img src="file:///E:/work/usepdf/src/main/resources/static/pics/megaphone.png" height="80" width="80"/></p>
+    <p style="font-family: 'Amsterdam', sans-serif; font-size: small; color: grey">Repeat it at least!</p>
 </div>
 </body>
 </html>

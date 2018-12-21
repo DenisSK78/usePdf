@@ -102,7 +102,7 @@
     </table>
 </div>
 <div class="div-picture">
-
+    <p><img alt="Embedded Image" height="80" width="80" src="data:image/jpeg;base64,${imgAsBase64}" /></p>
     <h5>Repeat it at least :)</h5>
 </div>
 </body>

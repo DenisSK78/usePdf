@@ -1,14 +1,12 @@
 package work.usepdf.service.email;
 
-import com.lowagie.text.pdf.codec.Base64;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.InputStreamSource;
+import org.springframework.context.ApplicationContext;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -20,21 +18,18 @@ import work.usepdf.repository.parser.RootPath;
 import work.usepdf.service.EmailService;
 import work.usepdf.service.EnService;
 import work.usepdf.service.PdfProcessor;
-import work.usepdf.service.impl.EnServiceImpl;
 
 import javax.activation.DataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.mail.util.ByteArrayDataSource;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static work.usepdf.repository.parser.RootPath.PATH;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -53,6 +48,9 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     private PdfProcessor pdfProcessor;
 
+    @Autowired
+    private ApplicationContext context;
+
     public MailResponse sendEmail(MailRequest request){
         MailResponse response = new MailResponse();
         MimeMessage massage = sender.createMimeMessage();
@@ -62,14 +60,22 @@ public class EmailServiceImpl implements EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(massage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                     StandardCharsets.UTF_8.name());
 
-//            File file = new File(PATH, RootPath.NEW_MURPHY_TXT);
-//            helper.addAttachment("new-murphy.txt", file);
-//            helper.addAttachment("megaphone.png", new ClassPathResource("static/megaphone.png"));
-
             Template t = config.getTemplate("mail-example.ftl");
             Map<String, Object> templateModel = new HashMap<>();
             List<Unit> unitList = enService.getRandomUnits(3);
             templateModel.put("units", unitList);
+
+            String base64Image = "";
+            File file = new File(RootPath.PATH + "/pics/megaphone.png");
+            try (FileInputStream imgFileIs = new FileInputStream(file)){
+                byte imageData[] = new byte[(int) file.length()];
+                imgFileIs.read(imageData);
+                base64Image = java.util.Base64.getEncoder().encodeToString(imageData);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            templateModel.put("imgAsBase64", base64Image);
+
             DataSource source = new ByteArrayDataSource(
                     pdfProcessor.getPdfForEmail(unitList).toByteArray(), "application/pdf");
             helper.addAttachment("example.pdf", source);
