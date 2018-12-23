@@ -51,6 +51,9 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     private ApplicationContext context;
 
+    @Autowired
+    private WriteBase64 writeBase64;
+
     public MailResponse sendEmail(MailRequest request){
         MailResponse response = new MailResponse();
         MimeMessage massage = sender.createMimeMessage();
@@ -65,15 +68,8 @@ public class EmailServiceImpl implements EmailService {
             List<Unit> unitList = enService.getRandomUnits(3);
             templateModel.put("units", unitList);
 
-            String base64Image = "";
-            File file = new File(RootPath.PATH + "/pics/megaphone.png");
-            try (FileInputStream imgFileIs = new FileInputStream(file)){
-                byte imageData[] = new byte[(int) file.length()];
-                imgFileIs.read(imageData);
-                base64Image = java.util.Base64.getEncoder().encodeToString(imageData);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            String base64Image = writeBase64.getBase64Pic(
+                    new File(RootPath.PATH + "/pics/megaphone.png")).orElse("");
             templateModel.put("imgAsBase64", base64Image);
 
             DataSource source = new ByteArrayDataSource(
