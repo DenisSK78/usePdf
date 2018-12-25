@@ -8,13 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import work.usepdf.object.Unit;
 import work.usepdf.repository.ArrayNumberLearnedUnits;
-import work.usepdf.repository.parser.RootPath;
 import work.usepdf.service.EnService;
 import work.usepdf.service.MurphyUnitsMap;
 import work.usepdf.service.PdfProcessor;
-
 
 import java.util.Map;
 
@@ -51,8 +48,4 @@ public class UsepdfApplicationTests {
         service.getRandomUnits(20).forEach(System.out::println);
     }
 
-    @Test
-    public void getPath() {
-        System.out.println(context.getBean("cPath"));
-    }
 }
