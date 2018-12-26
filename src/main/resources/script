@@ -25,3 +25,13 @@ CREATE TABLE user_authority(
   FOREIGN KEY (user_id) REFERENCES user(id),
   FOREIGN KEY (authority_id) REFERENCES authority(id)
 );
+
+INSERT INTO `usepdf`.`user` (`email`, `password`, `name`, `status`) VALUES ('user1@user1.ru', 'user1', 'User_one', 'OK');
+INSERT INTO `usepdf`.`user` (`email`, `password`, `name`, `status`) VALUES ('user2@user2.ru', 'user2', 'User_two', 'OK');
+
+INSERT INTO `usepdf`.`authority` (`name`) VALUES ('ROLE_ADMIN');
+INSERT INTO `usepdf`.`authority` (`name`) VALUES ('ROLE_USER');
+
+INSERT INTO `usepdf`.`user_authority` (`user_id`, `authority_id`) VALUES (1, 1);
+INSERT INTO `usepdf`.`user_authority` (`user_id`, `authority_id`) VALUES (1, 2);
+INSERT INTO `usepdf`.`user_authority` (`user_id`, `authority_id`) VALUES (2, 2);

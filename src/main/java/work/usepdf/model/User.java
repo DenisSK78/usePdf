@@ -1,6 +1,8 @@
 package work.usepdf.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,6 +31,7 @@ public class User {
     @NotNull
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private String status;
 
     @ManyToMany(fetch = FetchType.EAGER)
