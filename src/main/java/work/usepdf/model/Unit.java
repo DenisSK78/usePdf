@@ -1,4 +1,4 @@
-package work.usepdf.object;
+package work.usepdf.model;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -1,0 +1,27 @@
+CREATE SCHEMA if NOT EXISTS usepdf CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE usepdf;
+
+CREATE TABLE IF NOT EXISTS users(
+  id BIGINT AUTO_INCREMENT,
+  email VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(50) NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  status VARCHAR(10) NOT NULL DEFAULT "OK",
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS roles(
+  id BIGINT AUTO_INCREMENT,
+  role VARCHAR(20),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE user_role(
+  id BIGINT AUTO_INCREMENT,
+  users_id BIGINT NOT NULL,
+  roles_id BIGINT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (users_id) REFERENCES users(id),
+  FOREIGN KEY (roles_id) REFERENCES roles(id)
+)

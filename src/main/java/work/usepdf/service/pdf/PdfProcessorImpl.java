@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.xhtmlrenderer.pdf.ITextRenderer;
-import work.usepdf.object.Unit;
+import work.usepdf.model.Unit;
 import work.usepdf.repository.parser.RootPath;
 import work.usepdf.service.PdfProcessor;
 
@@ -24,9 +24,9 @@ import java.util.Map;
 @Service
 public class PdfProcessorImpl implements PdfProcessor {
 
-    private final Configuration config;
-
+    private static final String PDF = "pdf-example.ftl";
     private static final String ENCODING = "UTF-8";
+    private final Configuration config;
 
     @Autowired
     public PdfProcessorImpl(Configuration config) {
@@ -47,16 +47,15 @@ public class PdfProcessorImpl implements PdfProcessor {
 
         try {
             config.setEncoding(Locale.ENGLISH, ENCODING);
-            Template t = config.getTemplate("pdf-example.ftl", ENCODING);
+            Template t = config.getTemplate(PDF, ENCODING);
             Map<String, Object> templateModel = new HashMap<>();
             templateModel.put("units", unitList);
             String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, templateModel);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             renderer.setDocumentFromString(html);
             renderer.layout();
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             renderer.createPDF(outputStream, true);
             return outputStream;
-
         } catch (Exception e) {
             e.printStackTrace();
         }

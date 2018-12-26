@@ -2,7 +2,7 @@ package work.usepdf.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import work.usepdf.object.Unit;
+import work.usepdf.model.Unit;
 import work.usepdf.repository.ArrayNumberLearnedUnits;
 import work.usepdf.service.EnService;
 

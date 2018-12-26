@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import work.usepdf.object.MailRequest;
-import work.usepdf.object.MailResponse;
-import work.usepdf.object.Unit;
+import work.usepdf.model.MailRequest;
+import work.usepdf.model.MailResponse;
+import work.usepdf.model.Unit;
 import work.usepdf.service.EmailService;
 import work.usepdf.service.EnService;
 
@@ -38,6 +38,7 @@ public class EnRestController {
 //        Map<String, Object> model = new HashMap<>();
 //        model.put("Name", "Den");
 //        model.put("location", "Minsk, BY");
+        System.out.println("ee");
         return eService.sendEmail(request);
     }
 

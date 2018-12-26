@@ -1,7 +1,7 @@
 package work.usepdf.service;
 
-import work.usepdf.object.MailRequest;
-import work.usepdf.object.MailResponse;
+import work.usepdf.model.MailRequest;
+import work.usepdf.model.MailResponse;
 
 public interface EmailService {
 
