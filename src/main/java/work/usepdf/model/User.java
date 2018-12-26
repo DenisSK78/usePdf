@@ -32,7 +32,7 @@ public class User {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private String status;
+    private Status status;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -73,11 +73,11 @@ public class User {
         this.name = name;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
