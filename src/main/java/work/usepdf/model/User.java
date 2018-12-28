@@ -29,7 +29,7 @@ public class User {
     private String password;
 
     @NotNull
-    private String name;
+    private String userName;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -65,12 +65,12 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String name) {
+        this.userName = name;
     }
 
     public Status getStatus() {

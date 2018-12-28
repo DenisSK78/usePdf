@@ -23,4 +23,9 @@ public class EnPdfController {
         return "pdf-example";
     }
 
+    @GetMapping("home")
+    private String getEnglishForTestSecurity(){
+        return "english";
+    }
+
 }

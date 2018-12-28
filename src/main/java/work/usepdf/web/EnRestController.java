@@ -38,7 +38,7 @@ public class EnRestController {
 //        Map<String, Object> model = new HashMap<>();
 //        model.put("Name", "Den");
 //        model.put("location", "Minsk, BY");
-        System.out.println("ee");
+        System.out.println("ok --------------------------------------");
         return eService.sendEmail(request);
     }
 

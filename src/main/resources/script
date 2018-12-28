@@ -5,8 +5,8 @@ USE usepdf;
 CREATE TABLE IF NOT EXISTS user(
   id BIGINT AUTO_INCREMENT,
   email VARCHAR(50) NOT NULL UNIQUE,
-  password VARCHAR(50) NOT NULL,
-  name VARCHAR(50) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  user_name VARCHAR(50) NOT NULL,
   status VARCHAR(10) NOT NULL DEFAULT "OK",
   PRIMARY KEY (id)
 );
@@ -26,8 +26,8 @@ CREATE TABLE user_authority(
   FOREIGN KEY (authority_id) REFERENCES authority(id)
 );
 
-INSERT INTO `usepdf`.`user` (`email`, `password`, `name`, `status`) VALUES ('user1@user1.ru', 'user1', 'User_one', 'OK');
-INSERT INTO `usepdf`.`user` (`email`, `password`, `name`, `status`) VALUES ('user2@user2.ru', 'user2', 'User_two', 'OK');
+INSERT INTO `usepdf`.`user` (`email`, `password`, user_name, `status`) VALUES ('user1@user1.ru', 'user1', 'User_one', 'OK');
+INSERT INTO `usepdf`.`user` (`email`, `password`, user_name, `status`) VALUES ('user2@user2.ru', 'user2', 'User_two', 'OK');
 
 INSERT INTO `usepdf`.`authority` (`name`) VALUES ('ROLE_ADMIN');
 INSERT INTO `usepdf`.`authority` (`name`) VALUES ('ROLE_USER');
