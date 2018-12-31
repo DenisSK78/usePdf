@@ -18,7 +18,7 @@ public class WriteBase64 {
 
     Optional<String> getBase64Pic(File file){
         try (FileInputStream imgFileIs = new FileInputStream(file)){
-            byte imageData[] = new byte[(int) file.length()];
+            byte[] imageData = new byte[(int) file.length()];
             imgFileIs.read(imageData);
             strBase64 = java.util.Base64.getEncoder().encodeToString(imageData);
         } catch (IOException e) {
