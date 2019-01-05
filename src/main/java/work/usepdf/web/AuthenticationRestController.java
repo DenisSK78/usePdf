@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import work.usepdf.service.security.AuthenticationException;
-import work.usepdf.service.security.JwtAuthenticationRequest;
-import work.usepdf.service.security.JwtAuthenticationResponse;
-import work.usepdf.service.security.JwtTokenUtil;
+import work.usepdf.service.security.*;
 
 import java.util.Objects;
 
@@ -44,7 +41,7 @@ public class AuthenticationRestController {
     @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final JwtUser userDetails = (JwtUser) userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
@@ -53,7 +50,7 @@ public class AuthenticationRestController {
 //    public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
 //        String authToken = request.getHeader(tokenHeader);
 //        final String token = authToken.substring(7);
-//        String username = jwtTokenUtil.getUsernameFromToken(token);
+//        String username = jwtTokenUtil.getIdFromToken(token);
 //        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
 //
 //        if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {

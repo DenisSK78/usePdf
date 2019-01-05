@@ -1,8 +1,8 @@
 package work.usepdf.service;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import work.usepdf.service.security.JwtUser;
 
 public interface UserService extends UserDetailsService {
-    UserDetails loadUserByUsername(String email);
+    JwtUser loadUserByUsername(String email);
 }

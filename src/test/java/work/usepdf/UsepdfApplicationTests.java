@@ -71,6 +71,6 @@ public class UsepdfApplicationTests {
 
     @Test
     public void decodePassword(){
-        System.out.println(BCrypt.hashpw("user", BCrypt.gensalt()));
+        System.out.println(BCrypt.hashpw("user2", BCrypt.gensalt()));
     }
 }

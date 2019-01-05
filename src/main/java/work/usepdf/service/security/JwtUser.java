@@ -1,43 +1,24 @@
 package work.usepdf.service.security;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class JwtUser implements UserDetails {
+public class JwtUser extends User implements UserDetails {
 
     private static final long serialVersionUID = 6955485316728953833L;
 
     private Long id;
-    private String userName;
-    private String password;
-    private Collection<? extends GrantedAuthority> authorities;
 
     public JwtUser(Long id, String userName, String password, Collection<? extends GrantedAuthority> authorities) {
+        super(userName, password, authorities);
         this.id = id;
-        this.userName = userName;
-        this.password = password;
-        this.authorities = authorities;
     }
 
-    public Long getId() {
+    Long getId() {
         return id;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return userName;
     }
 
     @Override
