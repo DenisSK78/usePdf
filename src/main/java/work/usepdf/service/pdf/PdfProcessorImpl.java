@@ -47,9 +47,11 @@ public class PdfProcessorImpl implements PdfProcessor {
 
         try {
             config.setEncoding(Locale.ENGLISH, ENCODING);
+
             Template t = config.getTemplate(PDF, ENCODING);
             Map<String, Object> templateModel = new HashMap<>();
             templateModel.put("units", unitList);
+
             String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, templateModel);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             renderer.setDocumentFromString(html);

@@ -22,7 +22,7 @@ public class WriteBase64 {
             imgFileIs.read(imageData);
             strBase64 = java.util.Base64.getEncoder().encodeToString(imageData);
         } catch (IOException e) {
-            logger.error("Encode base64 exception.");
+            logger.error("Code image in base64 exception.");
             e.printStackTrace();
         }
         return Optional.ofNullable(strBase64);

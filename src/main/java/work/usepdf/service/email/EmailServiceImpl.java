@@ -35,6 +35,8 @@ public class EmailServiceImpl implements EmailService {
 
     private Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
 
+    private static String PIC_PATH = RootPath.PATH + "/pics/";
+
     @Autowired
     private JavaMailSender sender;
 
@@ -68,7 +70,7 @@ public class EmailServiceImpl implements EmailService {
             templateModel.put("units", unitList);
 
             String base64Image = writeBase64.getBase64Pic(
-                    new File(RootPath.PATH + "/pics/megaphone.png")).orElse("");
+                    new File(PIC_PATH + "megaphone.png")).orElse("");
             templateModel.put("imgAsBase64", base64Image);
 
             DataSource source = new ByteArrayDataSource(
