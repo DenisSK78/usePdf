@@ -2,8 +2,8 @@ package work.usepdf.service.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import work.usepdf.model.Authority;
-import work.usepdf.model.User;
+import work.usepdf.model.database.Authority;
+import work.usepdf.model.database.User;
 
 import java.util.List;
 import java.util.stream.Collectors;

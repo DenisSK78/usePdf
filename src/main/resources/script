@@ -3,12 +3,12 @@ CREATE SCHEMA if NOT EXISTS usepdf CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE usepdf;
 
 CREATE TABLE IF NOT EXISTS user(
-  id BIGINT AUTO_INCREMENT,
-  email VARCHAR(50) NOT NULL UNIQUE,
-  password VARCHAR(100) NOT NULL,
-  user_name VARCHAR(50) NOT NULL,
-  status VARCHAR(10) NOT NULL DEFAULT "OK",
-  PRIMARY KEY (id)
+   id BIGINT AUTO_INCREMENT,
+   email VARCHAR(50) NOT NULL UNIQUE,
+   password VARCHAR(100) NOT NULL,
+   user_name VARCHAR(50) NOT NULL,
+   status VARCHAR(10) NOT NULL DEFAULT "OK",
+   PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS authority(
@@ -17,13 +17,31 @@ CREATE TABLE IF NOT EXISTS authority(
   PRIMARY KEY (id)
 );
 
-CREATE TABLE user_authority(
+CREATE TABLE  IF NOT EXISTS user_authority(
   id BIGINT AUTO_INCREMENT,
   user_id BIGINT NOT NULL,
   authority_id BIGINT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES user(id),
   FOREIGN KEY (authority_id) REFERENCES authority(id)
+);
+
+CREATE TABLE IF NOT EXISTS phrase(
+  id BIGINT AUTO_INCREMENT,
+  text_en VARCHAR(255) NOT NULL,
+  text_ru VARCHAR(255) NOT NULL,
+  user_id BIGINT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+CREATE TABLE IF NOT EXISTS word(
+  id BIGINT AUTO_INCREMENT,
+  world_en VARCHAR(255) NOT NULL,
+  world_ru VARCHAR(255) NOT NULL,
+  user_id BIGINT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
 INSERT INTO `usepdf`.`user` (`email`, `password`, user_name, `status`) VALUES ('user1@user1.ru', 'user1', 'User_one', 'OK');
@@ -35,3 +53,13 @@ INSERT INTO `usepdf`.`authority` (`name`) VALUES ('ROLE_USER');
 INSERT INTO `usepdf`.`user_authority` (`user_id`, `authority_id`) VALUES (1, 1);
 INSERT INTO `usepdf`.`user_authority` (`user_id`, `authority_id`) VALUES (1, 2);
 INSERT INTO `usepdf`.`user_authority` (`user_id`, `authority_id`) VALUES (2, 2);
+
+INSERT INTO `usepdf`.`word` (word_en, word_ru, `user_id`) VALUES ('word', 'слово', 1);
+INSERT INTO `usepdf`.`word` (word_en, word_ru, `user_id`) VALUES ('user', 'пользователь', 1);
+INSERT INTO `usepdf`.`word` (word_en, word_ru, `user_id`) VALUES ('phrase', 'фраза', 1);
+INSERT INTO `usepdf`.`word` (word_en, word_ru, `user_id`) VALUES ('use', 'использовать', 1);
+
+INSERT INTO `usepdf`.`phrase` (`text_en`, `text_ru`, `user_id`) VALUES ('It is big world', 'Это большой мир', 1);
+INSERT INTO `usepdf`.`phrase` (`text_en`, `text_ru`, `user_id`) VALUES ('Small room', 'Маленькая комната', 1);
+INSERT INTO `usepdf`.`phrase` (`text_en`, `text_ru`, `user_id`) VALUES ('I''m going to the cinema', 'Я иду в кино', 1);
+

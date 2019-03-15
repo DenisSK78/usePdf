@@ -1,4 +1,6 @@
-package work.usepdf.model;
+package work.usepdf.model.database;
+
+import work.usepdf.model.Status;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

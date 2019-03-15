@@ -1,4 +1,7 @@
-package work.usepdf.model;
+package work.usepdf.model.database;
+
+import work.usepdf.model.AuthorityName;
+import work.usepdf.model.database.User;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
