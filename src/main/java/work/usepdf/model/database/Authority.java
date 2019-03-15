@@ -14,11 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "authority")
-public class Authority {
+public class Authority implements Serializable {
+
+    private static final long serialVersionUID = -4175947533542694350L;
 
     @Id
     @Column(name = "id")

@@ -44,6 +44,20 @@ CREATE TABLE IF NOT EXISTS word(
   FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
+CREATE TABLE IF NOT EXISTS log_update(
+  id BIGINT AUTO_INCREMENT,
+  date_update DATE NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS text_log_update(
+  id BIGINT AUTO_INCREMENT,
+  text_log VARCHAR(255),
+  log_update_id BIGINT,
+  PRIMARY KEY (id),
+  FOREIGN KEY (log_update_id) REFERENCES log_update(id)
+);
+
 INSERT INTO `usepdf`.`user` (`email`, `password`, user_name, `status`) VALUES ('user1@user1.ru', 'user1', 'User_one', 'OK');
 INSERT INTO `usepdf`.`user` (`email`, `password`, user_name, `status`) VALUES ('user2@user2.ru', 'user2', 'User_two', 'OK');
 

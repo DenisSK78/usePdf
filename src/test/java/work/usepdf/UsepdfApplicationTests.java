@@ -112,14 +112,14 @@ public class UsepdfApplicationTests {
         List<Phrase> phrases = phraseService.getByUserID(1L);
         Phrase phrase = phrases.get(0);
 
-        System.out.println(phrase.getTextEn());
+        System.out.println(phrase.getTextEn() + " <- getFirst");
 
         phrase.setTextEn(phrase.getTextEn() + " " + LocalDate.now());
         Long phraseId = phrase.getId();
         phraseService.updatePhrase(phrase);
         phrase = phraseService.getPhraseById(1L).orElse(new Phrase());
 
-        System.out.println(phrase.getTextEn());
+        System.out.println(phrase.getTextEn() + " <- getFirst after first Update");
 
         String strTextEn = phrase.getTextEn();
         String [] arrStr = strTextEn.trim().split(" ");
@@ -132,6 +132,6 @@ public class UsepdfApplicationTests {
         phraseService.updatePhrase(phrase);
         phrase = phraseService.getPhraseById(1L).orElse(new Phrase());
 
-        System.out.println(phrase.getTextEn());
+        System.out.println(phrase.getTextEn() + " <- getFirst after second Update");
     }
 }
