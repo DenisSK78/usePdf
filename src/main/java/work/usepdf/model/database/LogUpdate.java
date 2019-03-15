@@ -8,6 +8,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "log_update")
@@ -21,6 +22,20 @@ public class LogUpdate implements Serializable {
 
     @NotNull
     private Date dateUpdate;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LogUpdate logUpdate = (LogUpdate) o;
+        return Objects.equals(id, logUpdate.id) &&
+                Objects.equals(dateUpdate, logUpdate.dateUpdate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, dateUpdate);
+    }
 
     public LogUpdate() {}
 
@@ -38,5 +53,13 @@ public class LogUpdate implements Serializable {
 
     public void setDateUpdate(Date dateUpdate) {
         this.dateUpdate = dateUpdate;
+    }
+
+    @Override
+    public String toString() {
+        return "LogUpdate{" +
+                "id=" + id +
+                ", dateUpdate=" + dateUpdate +
+                '}';
     }
 }

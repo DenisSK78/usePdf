@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "text_log_update")
@@ -52,5 +53,29 @@ public class TextLogUpdate implements Serializable {
 
     public void setLogUpdate(LogUpdate logUpdate) {
         this.logUpdate = logUpdate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TextLogUpdate that = (TextLogUpdate) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(textLog, that.textLog) &&
+                Objects.equals(logUpdate, that.logUpdate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, textLog, logUpdate);
+    }
+
+    @Override
+    public String toString() {
+        return "TextLogUpdate{" +
+                "id=" + id +
+                ", textLog='" + textLog + '\'' +
+                ", logUpdate=" + logUpdate +
+                '}';
     }
 }
