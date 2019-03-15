@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -24,7 +25,7 @@ public class TextLogUpdate implements Serializable {
     @NotNull
     private String textLog;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "log_update_id")
     private LogUpdate logUpdate;
 
