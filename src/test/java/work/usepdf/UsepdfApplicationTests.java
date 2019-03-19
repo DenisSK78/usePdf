@@ -13,7 +13,6 @@ import work.usepdf.model.database.Phrase;
 import work.usepdf.model.database.User;
 import work.usepdf.model.database.Word;
 import work.usepdf.repository.ArrayNumberLearnedUnits;
-import work.usepdf.repository.PhraseRepository;
 import work.usepdf.repository.UserRepository;
 import work.usepdf.service.EnService;
 import work.usepdf.service.MurphyUnitsMap;
@@ -24,7 +23,6 @@ import work.usepdf.service.security.JwtUser;
 import work.usepdf.service.security.JwtUserFactory;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -78,7 +76,7 @@ public class UsepdfApplicationTests {
 
     @Test
     public void getJwtUser(){
-        JwtUser jwtUser = JwtUserFactory.create(userRepository.findByEmail("user@user.ru"));
+        JwtUser jwtUser = JwtUserFactory.create(userRepository.findByEmail("user1@user1.ru"));
         System.out.println(jwtUser);
     }
 

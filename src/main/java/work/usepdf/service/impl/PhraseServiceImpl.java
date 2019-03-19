@@ -7,6 +7,7 @@ import work.usepdf.model.database.User;
 import work.usepdf.repository.PhraseRepository;
 import work.usepdf.repository.UserRepository;
 import work.usepdf.service.PhraseService;
+import work.usepdf.service.anotation.LogUpdate;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +35,7 @@ public class PhraseServiceImpl implements PhraseService {
         return phraseRepository.findByUser(user);
     }
 
+    @LogUpdate
     @Override
     public Phrase updatePhrase(Phrase phrase) {
         return phraseRepository.save(phrase);
