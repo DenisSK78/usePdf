@@ -60,7 +60,7 @@ public class LoggingUpdateAnnotationPostBeenProcessor implements BeanPostProcess
                                 Method m = cl.getMethod("getId");
                                 Object nObj = args[0];
                                 Object oObj = entityManager.find(cl, m.invoke(nObj));
-                                Map<String, Object> diffMap = getDifference(cl, oObj, nObj, methodList);
+                                Map<String, Object> diffMap = getDifference(oObj, nObj, methodList);
                                 //toDo: this you can write in db or log!
                                 System.out.println(diffMap);
                             }
@@ -77,7 +77,7 @@ public class LoggingUpdateAnnotationPostBeenProcessor implements BeanPostProcess
      * @return Map with key: nameField value: value this field
      * with has changes
      */
-    private Map<String, Object> getDifference(Object pCl, Object oObj, Object nObj, List<Method> methodList) throws InvocationTargetException, IllegalAccessException {
+    private Map<String, Object> getDifference(Object oObj, Object nObj, List<Method> methodList) throws InvocationTargetException, IllegalAccessException {
         Map<String, Object> diffMap = new HashMap<>();
         for (Method method : methodList){
           Object oVal = method.invoke(oObj);
