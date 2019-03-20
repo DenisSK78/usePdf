@@ -63,6 +63,8 @@ public class LoggingUpdateAnnotationPostBeenProcessor implements BeanPostProcess
                                 Map<String, Object> diffMap = getDifference(oObj, nObj, methodList);
                                 //toDo: this you can write in db or log!
                                 System.out.println(diffMap);
+                                System.out.println("------------------------------------------------------------------------------------------------");
+
                             }
                         }
                         return method.invoke(bean, args);
@@ -77,12 +79,28 @@ public class LoggingUpdateAnnotationPostBeenProcessor implements BeanPostProcess
      * @return Map with key: nameField value: value this field
      * with has changes
      */
-    private Map<String, Object> getDifference(Object oObj, Object nObj, List<Method> methodList) throws InvocationTargetException, IllegalAccessException {
+    private Map<String, Object> getDifference(Object oObj, Object nObj, List<Method> methodList) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Map<String, Object> diffMap = new HashMap<>();
+        System.out.println("------------------------------------------------------------------------------------------------");
+        System.out.println(oObj);
+        System.out.println(nObj);
         for (Method method : methodList){
           Object oVal = method.invoke(oObj);
           Object nVal = method.invoke(nObj);
-          if (!oVal.equals(nVal)){
+          if(nObj == null || oVal == null) {
+              if (nVal != oVal) {
+                  diffMap.put(method.getName(), nVal);
+              }
+              //for object from our package model
+          } else if (nVal.getClass().getPackage().getName().contains("work.usepdf.model.")){
+              Method mNObjGetId = nObj.getClass().getMethod("getId");
+              Method mOObjGetID = oObj.getClass().getMethod("getId");
+              Object clNObj = mNObjGetId.invoke(nObj);
+              Object clOObj = mOObjGetID.invoke(oObj);
+              if (clNObj != clOObj){
+                  diffMap.put(method.getName(), nVal);
+              }
+          } else if (!oVal.equals(nVal)){
               diffMap.put(method.getName(), nVal);
           }
         }
