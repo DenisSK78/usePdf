@@ -32,7 +32,7 @@ public class EnServiceImpl implements EnService {
         Integer[] numbersArr = new Integer[numbers];
 
         for (int j = 0; j < numbers;) {
-            Integer ren = new Random().nextInt(numbersList.size());
+            int ren = new Random().nextInt(numbersList.size());
             if (numbersList.get(ren)!=0) {
                 numbersArr[j] = numbersList.get(ren);
                 numbersList.set(ren, 0);

@@ -63,7 +63,6 @@ public class LoggingUpdateAnnotationPostBeenProcessor implements BeanPostProcess
                                 Map<String, Object> diffMap = getDifference(oObj, nObj, methodList);
                                 //toDo: this you can write in db or log!
                                 System.out.println(diffMap + " ***** ");
-
                             }
                         }
                         return method.invoke(bean, args);
